@@ -63,7 +63,7 @@
           <div><span class="value">{{ unpaidAmount | formatNumber }}</span></div>
         </div>
       </div>
-      <div class="card mb-4 bg-danger" v-if="accountBalance < unpaidAmount">
+      <div class="card mb-4 bg-danger text-white" v-if="accountBalance < unpaidAmount">
         <div class="body">
           <div><span class="label">BORROW</span></div>
           <div><span class="value">{{ unpaidAmount - accountBalance | formatNumber }}</span></div>
@@ -233,7 +233,7 @@ export default {
   column-gap: 15px;
 }
 .expenses-chart{
-  height: 350px;
+  height: 380px;
   width: 100%;
 }
 .expenses {
