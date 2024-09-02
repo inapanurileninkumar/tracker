@@ -1,0 +1,133 @@
+.row {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
+    $columns: 12;
+    column-gap: 20px;
+
+    @for $i from 1 through $columns {
+        .col-#{$i} {
+            box-sizing: border-box;
+            width: 100% / $columns * $i;
+            min-width: 100% / $columns * $i;
+            max-width: 100% / $columns * $i;
+        }
+
+        @media screen and (min-width: 576px) and (max-width: 767px) {
+            .col-xs-#{$i} {
+                box-sizing: border-box;
+                width: 100% / $columns * $i;
+                min-width: 100% / $columns * $i;
+                max-width: 100% / $columns * $i;
+            }
+        }
+
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+            .col-sm-#{$i} {
+                box-sizing: border-box;
+                width: 100% / $columns * $i;
+                min-width: 100% / $columns * $i;
+                max-width: 100% / $columns * $i;
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            .col-md-#{$i} {
+                box-sizing: border-box;
+                width: calc(((100% / $columns) * $i) - 10px);
+                min-width: calc(((100% / $columns) * $i) - 10px);
+                max-width: calc(((100% / $columns) * $i) - 10px);
+            }
+        }
+    }
+
+    $aligns: (
+        'start': 'flex-start',
+        'end': 'flex-end',
+        'center': 'center',
+        'between': 'space-between',
+        'around': 'space-around',
+        'evenly': 'space-evenly',
+        'stretch': 'stretch'
+    );
+
+@each $key, $value in $aligns {
+    &.align-#{$key} {
+        align-items: #{$value};
+    }
+}
+
+$justify: (
+    'start': 'flex-start',
+    'end': 'flex-end',
+    'center': 'center',
+    'between': 'space-between',
+    'around': 'space-around',
+    'evenly': 'space-evenly'
+);
+
+@each $key, $value in $justify {
+    &.justify-#{$key} {
+        justify-content: #{$value};
+    }
+}
+}
+
+.flex {
+    display: flex;
+    gap: 10px;
+
+    &.align-center {
+        align-items: center;
+    }
+
+    &.justify-center {
+        justify-content: center;
+    }
+}
+
+
+$spacings : (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 20);
+
+@each $spacing in $spacings {
+    .m-#{$spacing} {
+        margin: #{$spacing}px;
+    }
+
+    .mt-#{$spacing} {
+        margin-top: #{$spacing}px;
+    }
+
+    .mb-#{$spacing} {
+        margin-bottom: #{$spacing}px;
+    }
+
+    .ml-#{$spacing} {
+        margin-left: #{$spacing}px;
+    }
+
+    .mr-#{$spacing} {
+        margin-right: #{$spacing}px;
+    }
+
+    .p-#{$spacing} {
+        padding: #{$spacing}px;
+    }
+
+    .pt-#{$spacing} {
+        padding-top: #{$spacing}px;
+    }
+
+    .pb-#{$spacing} {
+        padding-bottom: #{$spacing}px;
+    }
+
+    .pl-#{$spacing} {
+        padding-left: #{$spacing}px;
+    }
+
+    .pr-#{$spacing} {
+        padding-right: #{$spacing}px;
+    }
+}
