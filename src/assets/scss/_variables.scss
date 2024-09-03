@@ -1,0 +1,15 @@
+$primary: rgb(0, 134, 196);
+$secondary: rgb(179, 179, 179);
+$warning: rgb(247, 150, 40);
+$success: rgb(7, 117, 40);
+$danger: rgb(250, 128, 114);
+$white: rgb(255, 255, 255);
+
+$theme-colors: (
+    "primary": $primary,
+    "secondary": $secondary,
+    "warning": $warning,
+    "success": $success,
+    "danger": $danger,
+    "white": $white
+);

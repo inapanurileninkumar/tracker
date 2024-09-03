@@ -1,0 +1,153 @@
+@font-face {
+    font-family: "SUSE";
+    src: url("../fonts/SUSE/SUSE-VariableFont_wght.ttf");
+}
+
+body {
+    margin: 0;
+    font-family: "SUSE", sans-serif;
+    font-optical-sizing: auto;
+    background-color: whitesmoke;
+    letter-spacing: 1px;
+}
+
+.app-content {
+    margin-top: 80px;
+}
+
+.pointer-cursor {
+    cursor: pointer;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.card {
+    background-color: #ffffff;
+    text-align: left;
+    border-radius: 0.5rem;
+    padding: 20px 15px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    .header {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .actions {
+            .action {
+                border: 1px solid rgb(0, 134, 196);
+                background-color: transparent;
+                outline: none;
+                color: rgb(0, 134, 196);
+                padding: 6px 6px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: all 0.3s ease-in-out;
+                font-weight: bold;
+
+                &:hover {
+                    background-color: rgb(0, 134, 196);
+                    color: white;
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                }
+            }
+        }
+    }
+
+    .body {
+        width: 100%;
+        min-width: 100%;
+    }
+
+}
+
+.settlements-container {}
+
+.date-picker {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+
+    cursor: pointer;
+    font-family: 'SUSE', sans-serif;
+    font-size: 15px;
+}
+
+.date-picker-calendar {
+    right: 50px;
+    border-radius: 10px;
+    border: none !important;
+    padding: 5px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+table {
+    border: 1px solid whitesmoke;
+    border-bottom: 0;
+    border-spacing: 0 2px;
+    width: 100%;
+
+    thead {
+        tr {
+            background-color: #0086C4;
+            color: white;
+        }
+    }
+
+    thead th,
+    tbody td {
+        border-collapse: collapse;
+        padding: 5px 15px;
+        font-size: 15px;
+
+        &:not(:last-child) {
+            border-right: 1px solid inherit;
+        }
+
+        &.right-align {
+            text-align: right;
+            padding-right: 10px;
+        }
+    }
+
+    tbody tr {
+        &.active {
+            background: rgb(200, 230, 241) !important;
+            font-weight: bold;
+        }
+
+        &:nth-child(even) {
+            background-color: whitesmoke;
+        }
+
+        &:last-child td {
+            border-collapse: collapse;
+            border-bottom: 1px solid whitesmoke;
+        }
+    }
+
+    tfoot {
+        tr {
+            td {
+                background: black;
+                color: white;
+            }
+        }
+    }
+
+    &.settlements,
+    &.emis {
+        width: 100%;
+    }
+
+}
