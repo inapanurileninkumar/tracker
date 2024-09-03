@@ -7,6 +7,11 @@ import '@/assets/styles/layout.scss'
 import '@/assets/styles/main.scss'
 import '@/assets/scss/_theme.scss'
 
+import '@/assets/fontawesome/css/fontawesome.css'
+import '@/assets/fontawesome/css/brands.css'
+import '@/assets/fontawesome/css/regular.css'
+import '@/assets/fontawesome/css/solid.css'
+
 import { formatNumber, formatDate } from './mixins/format'
 
 Vue.config.productionTip = false

@@ -20,7 +20,7 @@ export default [
   {
     name: 'RENT + POWER',
     startDate: '2024/09/01',
-    endDate: '2024/10/31',
+    endDate: '2025/4/30',
     amount: 8000
   },
   {
