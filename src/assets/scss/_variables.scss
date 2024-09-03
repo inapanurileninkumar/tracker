@@ -4,6 +4,7 @@ $warning: rgb(247, 150, 40);
 $success: rgb(7, 117, 40);
 $danger: rgb(250, 128, 114);
 $white: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
 
 $theme-colors: (
     "primary": $primary,
@@ -11,5 +12,6 @@ $theme-colors: (
     "warning": $warning,
     "success": $success,
     "danger": $danger,
-    "white": $white
+    "white": $white,
+    "black": $black
 );

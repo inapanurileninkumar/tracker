@@ -21,9 +21,12 @@
                 <td>{{ expense.name }}</td>
                 <td class="right-align">{{ expense.amount | formatNumber }}</td>
                 <td class="checkbox">
-                  <div class="checkbox-container" :class="{ 'checked': expense.paid }">
-                    <div class="checkmark" v-if="expense.paid"></div>
-                  </div>
+                  <template v-if="expense.paid">
+                    <i class="fa-regular fa-square-check text-primary fs-lg"></i>
+                  </template>
+                  <template v-else>
+                    <i class="fa-regular fa-square text-primary fs-lg"></i>
+                  </template>
                 </td>
               </tr>
             </template>
@@ -31,14 +34,16 @@
         </table>
       </div>
     </div>
-    <div class="card col-md-5 col-sm-12 col-xs-12">
-      <div class="body">
-        <div class="flex justify-center align-center">
-          <v-chart class="expenses-chart" :option="chartData" autoresize />
+    <div class="col-md-5 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="body">
+          <div class="col-12 justify-center align-center">
+            <v-chart class="expenses-chart" :option="chartData" autoresize />
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-3 col-sm-12 col-xs-12">
+    <div class="col-sm-12 col-xs-12 col-md-3">
       <div class="card mb-4 bg-primary text-white">
         <div class="body">
           <div><span class="label">TOTAL</span></div>
@@ -48,7 +53,15 @@
       <div class="card mb-4">
         <div class="body">
           <div><span class="label">ACCOUNT BALANCE</span></div>
-          <div><span class="value">{{ accountBalance | formatNumber }}</span></div>
+          <div v-if="showEditAccountBalance">
+            <input type="number" class="edit-account-balance" v-model.number="currentAccountBalance"
+              @blur="showEditAccountBalance = false" />
+          </div>
+          <div v-else class="pointer-cursor" @click="showEditAccountBalance = true">
+            <span class="value">
+              {{ accountBalance |formatNumber }}
+            </span>
+          </div>
         </div>
       </div>
       <div class="card mb-4 bg-success text-white">
@@ -74,7 +87,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { formatNumber } from '../mixins/format'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
@@ -85,7 +98,6 @@ import {
   LegendComponent
 } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
-// import { ref, defineComponent } from 'vue'
 
 use([
   CanvasRenderer,
@@ -105,14 +117,22 @@ export default {
   },
   data () {
     return {
-      currentMonthExpenses: []
-      // accountBalance: 0
+      currentMonthExpenses: [],
+      showEditAccountBalance: false
     }
   },
   computed: {
     ...mapGetters('settlements', ['settlements']),
     ...mapGetters('emis', ['emis']),
     ...mapGetters('configuration', ['currentMonth', 'currentMonthSalary', 'accountBalance']),
+    currentAccountBalance: {
+      get () {
+        return this.accountBalance
+      },
+      set (value) {
+        this.SET_ACCOUNT_BALANCE(value)
+      }
+    },
     currentMonthEmis: function () {
       return this.emis.filter(emi => emi.startDate <= this.currentMonth && emi.endDate >= this.currentMonth)
     },
@@ -185,17 +205,13 @@ export default {
   watch: {
     currentMonth () { this.buildCurrentMonthExpenses() },
     emis () { this.buildCurrentMonthExpenses() },
-    settlements () { this.buildCurrentMonthExpenses() },
-    currentMonthSalary () { this.resetAccountBalance() }
+    settlements () { this.buildCurrentMonthExpenses() }
   },
   mounted () {
     this.buildCurrentMonthExpenses()
-    this.resetAccountBalance()
   },
   methods: {
-    resetAccountBalance () {
-      // this.accountBalance = this.currentMonthSalary
-    },
+    ...mapMutations('configuration', ['SET_ACCOUNT_BALANCE']),
     buildCurrentMonthExpenses () {
       const currentMonthEMIs = this.emis.filter(emi => emi.startDate <= this.currentMonth && emi.endDate >= this.currentMonth)
       const currentMonthSettlements = this.settlements.filter(settlement => settlement.month === this.currentMonth)
@@ -212,11 +228,6 @@ export default {
     },
     handleExpensePaid (expense) {
       this.currentMonthExpenses[expense.index].paid = !this.currentMonthExpenses[expense.index].paid
-      // if (expense.paid) {
-      //   this.accountBalance -= expense.amount
-      // } else {
-      //   this.accountBalance += expense.amount
-      // }
     }
   }
 }
@@ -242,28 +253,15 @@ export default {
     display: flex;
     justify-content: center;
   }
+}
+.edit-account-balance{
+  border: none;
+  outline: none;
+  border-bottom: 1px dashed black;
+  font-weight: bold;
 
-  .checkbox-container {
-    border: 1px solid #0086C4;
-    width: 15px;
-    height: 15px;
-    border-radius: 4px;
-    position: relative;
-
-    &.checked {
-      background-color: #0086C4;
-    }
-
-    .checkmark {
-      border-left: 2px solid white;
-      border-bottom: 2px solid white;
-      width: 9px;
-      height: 5px;
-      rotate: -45deg;
-      position: absolute;
-      left: 2px;
-      top: 2px;
-    }
+  &:focus{
+    outline: none;
   }
 }
 </style>

@@ -26,28 +26,28 @@ export default [
   },
   {
     month: '2024/10/01',
-    name: 'HYD ROOM ADVANCE',
-    amount: 40000
+    name: 'CROP LOAN BORRROWED',
+    amount: 102000
   },
   {
     month: '2024/10/01',
+    name: 'CROP LOAN BORROWED',
+    amount: 50000
+  },
+  {
+    month: '2025/01/01',
     name: 'VAMSI',
     amount: 55000
   },
   {
-    month: '2024/10/01',
+    month: '2024/11/01',
     name: 'GOLD LOAN',
-    amount: 95400
+    amount: 90000 + ((90000 / 100) * 1.5 * 6)
   },
   {
     month: '2024/10/01',
     name: 'AXIS CLEAR',
-    amount: 30000
-  },
-  {
-    month: '2024/10/01',
-    name: 'HYD OCT EXP',
-    amount: 20000
+    amount: 36000
   },
   {
     month: '2024/11/01',

@@ -69,8 +69,6 @@ body {
 
 }
 
-.settlements-container {}
-
 .date-picker {
     outline: none;
     border: none;
@@ -109,6 +107,10 @@ table {
         border-collapse: collapse;
         padding: 5px 15px;
         font-size: 15px;
+
+        &.no-padding {
+            padding: 0;
+        }
 
         &:not(:last-child) {
             border-right: 1px solid inherit;

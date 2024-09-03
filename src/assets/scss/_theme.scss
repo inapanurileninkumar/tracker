@@ -8,4 +8,12 @@
     .text-#{$color} {
         color: $value;
     }
+
+    .hover-bg-#{$color}:hover {
+        background-color: $value;
+    }
+
+    .hover-text-#{$color}:hover {
+        color: $value;
+    }
 }
