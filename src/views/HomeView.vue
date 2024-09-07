@@ -29,6 +29,16 @@
         </div>
       </div>
     </div>
+    <div class="row jusity-between mb-20">
+      <div class="col-md-12 col-sm-12 col-xs-12 card">
+        <div class="header">
+          <div class="title">INCOME & TAX CALCULATOR</div>
+        </div>
+        <div class="body">
+          <tax-calculator />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,6 +47,7 @@ import Expenses from '@/views/Expenses.vue'
 import Settlements from '@/views/Settlements.vue'
 import EMIs from '@/views/EMIs.vue'
 import MonthlyExpenses from '@/views/MonthlyExpenses.vue'
+import TaxCalculator from '@/components/TaxCalculator.vue'
 
 export default {
   name: 'HomeView',
@@ -44,7 +55,8 @@ export default {
     EMIs,
     Expenses,
     Settlements,
-    MonthlyExpenses
+    MonthlyExpenses,
+    TaxCalculator
   },
   data () {
     return {
