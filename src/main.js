@@ -12,7 +12,12 @@ import '@/assets/fontawesome/css/brands.css'
 import '@/assets/fontawesome/css/regular.css'
 import '@/assets/fontawesome/css/solid.css'
 
+import 'vue-popperjs/dist/vue-popper.css'
+import Popper from 'vue-popperjs'
+
 import { formatNumber, formatDate } from './mixins/format'
+
+Vue.component('AppPopper', Popper)
 
 Vue.config.productionTip = false
 Vue.filter('formatNumber', formatNumber)
