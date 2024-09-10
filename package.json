@@ -14,7 +14,8 @@
     "vue-echarts": "^7.0.3",
     "vue-router": "^3.5.1",
     "vuejs-datepicker": "^1.6.2",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "vue-popperjs": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
