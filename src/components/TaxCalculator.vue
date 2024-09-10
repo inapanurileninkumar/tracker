@@ -16,64 +16,68 @@
       <button :class="isTDSDeducted?'inactive':'active'" @click="isTDSDeducted=false">No TDS</button>
     </div>
     <div class="row align-start justify-center mt-10">
-      <table class="table col-md-6 col-sm-12">
-        <thead>
-          <tr>
-            <th>Index</th>
-            <th>Name</th>
-            <th>Tax</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(slabTax, index) in slabTaxes" :key="slabTax.name">
-            <td>{{ index + 1 }}</td>
-            <td>{{ slabTax.slabName }}</td>
-            <td>{{ slabTax.tax | formatNumber }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="table col-md-6 col-sm-12">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Gross Salary</td>
-            <td>{{ (this.grossIncome) | formatNumber }}</td>
-          </tr>
-          <tr>
-            <td>Taxable Salary</td>
-            <td>{{ (this.taxableIncome) | formatNumber }}</td>
-          </tr>
-          <tr>
-            <td>Income Tax</td>
-            <td>{{ (IncomeTax) | formatNumber }}</td>
-          </tr>
-          <tr>
-            <td>EPF</td>
-            <td>{{ (EPFContribution) | formatNumber }}</td>
-          </tr>
-          <tr>
-            <td>NPS</td>
-            <td>{{ (NPSContribution) | formatNumber }}</td>
-          </tr>
-          <tr>
-            <td>Profession Tax</td>
-            <td>{{ (ProfessionTax) | formatNumber }}</td>
-          </tr>
-          <tr>
-            <td>In Hand Salary</td>
-            <td>{{ (InHandSalary) | formatNumber }}</td>
-          </tr>
-          <tr>
-            <td>Monthly Salary</td>
-            <td>{{ (InHandSalary/12) | formatNumber }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Name</th>
+              <th>Tax</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(slabTax, index) in slabTaxes" :key="slabTax.name">
+              <td>{{ index + 1 }}</td>
+              <td>{{ slabTax.slabName }}</td>
+              <td>{{ slabTax.tax | formatNumber }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Gross Salary</td>
+              <td>{{ (this.grossIncome) | formatNumber }}</td>
+            </tr>
+            <tr>
+              <td>Taxable Salary</td>
+              <td>{{ (this.taxableIncome) | formatNumber }}</td>
+            </tr>
+            <tr>
+              <td>Income Tax</td>
+              <td>{{ (IncomeTax) | formatNumber }}</td>
+            </tr>
+            <tr>
+              <td>EPF</td>
+              <td>{{ (EPFContribution) | formatNumber }}</td>
+            </tr>
+            <tr>
+              <td>NPS</td>
+              <td>{{ (NPSContribution) | formatNumber }}</td>
+            </tr>
+            <tr>
+              <td>Profession Tax</td>
+              <td>{{ (ProfessionTax) | formatNumber }}</td>
+            </tr>
+            <tr>
+              <td>In Hand Salary</td>
+              <td>{{ (InHandSalary) | formatNumber }}</td>
+            </tr>
+            <tr>
+              <td>Monthly Salary</td>
+              <td>{{ (InHandSalary/12) | formatNumber }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

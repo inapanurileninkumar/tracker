@@ -1,24 +1,26 @@
 <template>
-  <table class="emis">
-    <thead>
-      <tr>
-        <th>MONTH</th>
-        <th>INCOME</th>
-        <th>EXPENSES</th>
-        <th>BALANCE</th>
-      </tr>
-    </thead>
-    <tbody>
-      <template v-for="(month, index) in monthlyExpenses">
-        <tr :key="index" :class="{ 'active': month.month === currentMonth }">
-          <td>{{ month.month | formatDate }}</td>
-          <td>{{ month.income | formatNumber }}</td>
-          <td>{{ month.expense | formatNumber }}</td>
-          <td>{{ month.balance | formatNumber }}</td>
+  <div class="row">
+    <table class="emis">
+      <thead>
+        <tr>
+          <th>MONTH</th>
+          <th>INCOME</th>
+          <th>EXPENSES</th>
+          <th>BALANCE</th>
         </tr>
-      </template>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <template v-for="(month, index) in monthlyExpenses">
+          <tr :key="index" :class="{ 'active': month.month === currentMonth }">
+            <td>{{ month.month | formatDate }}</td>
+            <td>{{ month.income | formatNumber }}</td>
+            <td>{{ month.expense | formatNumber }}</td>
+            <td>{{ month.balance | formatNumber }}</td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'

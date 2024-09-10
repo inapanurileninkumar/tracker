@@ -4,16 +4,7 @@
     align-items: flex-start;
     width: 100%;
     flex-wrap: wrap;
-
-    // @each $label, $value in $placements {
-    //     &.align-#{$label} {
-    //         align-items: $value;
-    //     }
-
-    //     &.justify-#{$label} {
-    //         justify-content: $value;
-    //     }
-    // }
+    column-gap: 10px;
 
     $breakpoints: (
         '-xs': 'max-width:576px',
@@ -27,6 +18,12 @@
     @each $screenName, $widths in $breakpoints {
         @media screen and (#{$widths}) {
             .col#{$screenName}-#{$colSpan} {
+
+                @if $screenName =="-xs" or $screenName =="-sm" {
+                    padding-top: 10px;
+                }
+
+                flex: 1;
                 min-width: calc((100% / 12) * #{$colSpan} - 30px);
                 width: calc((100% / 12) * #{$colSpan});
                 max-width: calc((100% / 12) * #{$colSpan});
@@ -36,7 +33,8 @@
     }
 
     .col-#{$colSpan} {
-        min-width: calc((100% / 12) * #{$colSpan});
+        flex: 1;
+        min-width: calc((100% / 12) * #{$colSpan} - 30px);
         width: calc((100% / 12) * #{$colSpan});
         max-width: calc((100% / 12) * #{$colSpan});
     }
