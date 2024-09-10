@@ -3,11 +3,17 @@
     <div class="row align-center justify-center">
       <input type="text" v-model.number="grossIncome" class="p-10">
     </div>
-    <div class="row justify-center mt-20" style="gap:10px;">
+    <div class="row justify-center mt-20 align-center" style="gap:10px;">
       <button @click="grossIncome = grossIncome - 50000">- 50K</button>
       <button @click="grossIncome = grossIncome - 100000">- 1 Lakh</button>
       <button @click="grossIncome = grossIncome + 50000">+ 50K</button>
       <button @click="grossIncome = grossIncome + 100000">+ 1 Lakh</button>
+      &nbsp;|&nbsp;
+      <button :class="is12PercentBasicEPF?'active':'inactive'" @click="is12PercentBasicEPF=true">12% basic EPF</button>
+      <button :class="is12PercentBasicEPF?'inactive':'active'" @click="is12PercentBasicEPF=false">1800 EPF</button>
+      &nbsp;|&nbsp;
+      <button :class="isTDSDeducted?'active':'inactive'" @click="isTDSDeducted=true">TDS</button>
+      <button :class="isTDSDeducted?'inactive':'active'" @click="isTDSDeducted=false">No TDS</button>
     </div>
     <div class="row align-start justify-center mt-10">
       <table class="table col-md-6 col-sm-12">
@@ -83,6 +89,8 @@ export default {
     return {
       grossIncome: 2150000,
       slabTaxes: [],
+      is12PercentBasicEPF: true,
+      isTDSDeducted: true,
       taxSlabs: [
         {
           maxSalary: Infinity,
@@ -129,7 +137,7 @@ export default {
       return this.grossIncome > 75000 ? this.grossIncome - 75000 : this.grossIncome
     },
     EPFContribution () {
-      return ((this.grossIncome / 100) * 36 / 100) * 12
+      return this.is12PercentBasicEPF ? (((this.grossIncome / 100) * 36 / 100) * 12) : (3600 * 12)
     },
     NPSContribution () {
       return 12 * 1500
@@ -138,7 +146,7 @@ export default {
       return 12 * 200
     },
     IncomeTax () {
-      return this.slabTaxes.length ? this.slabTaxes[this.slabTaxes.length - 1].tax : 0
+      return this.isTDSDeducted ? (this.slabTaxes.length ? this.slabTaxes[this.slabTaxes.length - 1].tax : 0) : 0
     },
     InHandSalary () {
       return this.grossIncome - this.IncomeTax - this.EPFContribution - this.NPSContribution - this.ProfessionTax
@@ -227,5 +235,12 @@ button{
   font-size: 14px;
   border-radius: 4px;
   cursor: pointer;
+
+  &.inactive{
+    background-color: white;
+    color:rgb(12, 124, 124);
+    border:2px solid rgb(12, 124, 124);
+    font-weight: bold;
+  }
 }
 </style>

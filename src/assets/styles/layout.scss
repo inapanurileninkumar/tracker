@@ -1,56 +1,56 @@
 .row {
     display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
-    max-width: 100%;
     flex-wrap: wrap;
-    $columns: 12;
-    column-gap: 20px;
 
-    @for $i from 1 through $columns {
-        .col-#{$i} {
-            box-sizing: border-box;
-            width: 100% / $columns * $i;
-            min-width: 100% / $columns * $i;
-            max-width: 100% / $columns * $i;
-        }
+    // @each $label, $value in $placements {
+    //     &.align-#{$label} {
+    //         align-items: $value;
+    //     }
 
-        @media screen and (min-width: 576px) and (max-width: 767px) {
-            .col-xs-#{$i} {
-                box-sizing: border-box;
-                width: 100% / $columns * $i;
-                min-width: 100% / $columns * $i;
-                max-width: 100% / $columns * $i;
-            }
-        }
+    //     &.justify-#{$label} {
+    //         justify-content: $value;
+    //     }
+    // }
 
-        @media screen and (min-width: 768px) and (max-width: 991px) {
-            .col-sm-#{$i} {
-                box-sizing: border-box;
-                width: 100% / $columns * $i;
-                min-width: 100% / $columns * $i;
-                max-width: 100% / $columns * $i;
-            }
-        }
+    $breakpoints: (
+        '-xs': 'max-width:576px',
+        '-sm': 'min-width:576px) and (max-width:768px',
+        '-md': 'min-width:768px) and (max-width:992px',
+        '-lg': 'min-width:992px) and (max-width:1440px',
+        '-xl': 'min-width:1440px',
+    );
 
-        @media screen and (min-width: 992px) {
-            .col-md-#{$i} {
-                box-sizing: border-box;
-                width: calc(((100% / $columns) * $i) - 10px);
-                min-width: calc(((100% / $columns) * $i) - 10px);
-                max-width: calc(((100% / $columns) * $i) - 10px);
+@for $colSpan from 0 through 12 {
+    @each $screenName, $widths in $breakpoints {
+        @media screen and (#{$widths}) {
+            .col#{$screenName}-#{$colSpan} {
+                min-width: calc((100% / 12) * #{$colSpan} - 30px);
+                width: calc((100% / 12) * #{$colSpan});
+                max-width: calc((100% / 12) * #{$colSpan});
+                transition: all 0.2s ease-in-out;
             }
         }
     }
 
-    $aligns: (
-        'start': 'flex-start',
-        'end': 'flex-end',
-        'center': 'center',
-        'between': 'space-between',
-        'around': 'space-around',
-        'evenly': 'space-evenly',
-        'stretch': 'stretch'
-    );
+    .col-#{$colSpan} {
+        min-width: calc((100% / 12) * #{$colSpan});
+        width: calc((100% / 12) * #{$colSpan});
+        max-width: calc((100% / 12) * #{$colSpan});
+    }
+}
+
+$aligns: (
+    'start': 'flex-start',
+    'end': 'flex-end',
+    'center': 'center',
+    'between': 'space-between',
+    'around': 'space-around',
+    'evenly': 'space-evenly',
+    'stretch': 'stretch'
+);
 
 @each $key, $value in $aligns {
     &.align-#{$key} {
@@ -73,6 +73,82 @@ $justify: (
     }
 }
 }
+
+// .row {
+//     display: flex;
+//     width: 100%;
+//     max-width: 100%;
+//     flex-wrap: wrap;
+//     $columns: 12;
+//     column-gap: 20px;
+
+//     @for $i from 1 through $columns {
+//         .col-#{$i} {
+//             box-sizing: border-box;
+//             width: 100% / $columns * $i;
+//             min-width: 100% / $columns * $i;
+//             max-width: 100% / $columns * $i;
+//         }
+
+//         @media screen and (min-width: 576px) and (max-width: 767px) {
+//             .col-xs-#{$i} {
+//                 box-sizing: border-box;
+//                 width: 100% / $columns * $i;
+//                 min-width: 100% / $columns * $i;
+//                 max-width: 100% / $columns * $i;
+//             }
+//         }
+
+//         @media screen and (min-width: 768px) and (max-width: 991px) {
+//             .col-sm-#{$i} {
+//                 box-sizing: border-box;
+//                 width: 100% / $columns * $i;
+//                 min-width: 100% / $columns * $i;
+//                 max-width: 100% / $columns * $i;
+//             }
+//         }
+
+//         @media screen and (min-width: 992px) {
+//             .col-md-#{$i} {
+//                 box-sizing: border-box;
+//                 width: calc(((100% / $columns) * $i) - 10px);
+//                 min-width: calc(((100% / $columns) * $i) - 10px);
+//                 max-width: calc(((100% / $columns) * $i) - 10px);
+//             }
+//         }
+//     }
+
+//     $aligns: (
+//         'start': 'flex-start',
+//         'end': 'flex-end',
+//         'center': 'center',
+//         'between': 'space-between',
+//         'around': 'space-around',
+//         'evenly': 'space-evenly',
+//         'stretch': 'stretch'
+//     );
+
+// @each $key, $value in $aligns {
+//     &.align-#{$key} {
+//         align-items: #{$value};
+//     }
+// }
+
+// $justify: (
+//     'start': 'flex-start',
+//     'end': 'flex-end',
+//     'center': 'center',
+//     'between': 'space-between',
+//     'around': 'space-around',
+//     'evenly': 'space-evenly'
+// );
+
+// @each $key, $value in $justify {
+//     &.justify-#{$key} {
+//         justify-content: #{$value};
+//     }
+// }
+// }
 
 .flex {
     display: flex;

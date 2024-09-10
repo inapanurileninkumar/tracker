@@ -65,6 +65,7 @@ body {
     .body {
         width: 100%;
         min-width: 100%;
+        overflow-x: auto;
     }
 
 }
@@ -93,7 +94,7 @@ table {
     border: 1px solid whitesmoke;
     border-bottom: 0;
     border-spacing: 0 2px;
-    width: 100%;
+    // display: none;
 
     thead {
         tr {
@@ -145,11 +146,6 @@ table {
                 color: white;
             }
         }
-    }
-
-    &.settlements,
-    &.emis {
-        width: 100%;
     }
 
 }
