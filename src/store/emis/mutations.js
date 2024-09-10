@@ -6,6 +6,6 @@ export default {
     state.emis.push(emi)
   },
   REMOVE_EMI (state, emi) {
-    state.emis = state.emis.filter(em => em.id !== emi.id)
+    state.emis = state.emis.filter(em => em.id !== emi)
   }
 }

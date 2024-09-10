@@ -6,6 +6,6 @@ export default {
     state.settlements.push(settlement)
   },
   REMOVE_SETTLEMENT (state, settlement) {
-    state.settlements = state.settlements.filter(s => s.id !== settlement.id)
+    state.settlements = state.settlements.filter(s => s.id !== settlement)
   }
 }

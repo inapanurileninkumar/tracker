@@ -17,8 +17,18 @@
           <td>{{ settlement.amount | formatNumber }}</td>
           <td>{{ settlement.month | formatDate }}</td>
           <td>
-            <span class="fas fa-pen fs-sm ml-5 pointer-cursor"></span>
-            <span class="far fa-trash-alt fs-sm ml-10 pointer-cursor"></span>
+            <span class="fas fa-pen fs-sm ml-5 pointer-cursor" @click="handleEditSettlement(settlement.id)"></span>
+            <app-popper
+              trigger="clickToOpen"
+              :options="{
+                placement: 'top',
+              }">
+              <div class="popper">
+                <div class="p-10">Delete ?</div>
+                <button @click="handleDeleteSettlement(settlement.id)">Yes</button>
+              </div>
+              <span class="far fa-trash-alt fs-sm ml-10 pointer-cursor" slot="reference"></span>
+            </app-popper>
           </td>
         </tr>
       </template>
@@ -57,7 +67,7 @@
   </table>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
 export default {
   name: 'AppSettlements',
@@ -83,6 +93,14 @@ export default {
   },
   methods: {
     ...mapActions('settlements', ['addSettlement']),
+    ...mapMutations('settlements', ['REMOVE_SETTLEMENT']),
+    handleEditSettlement (settlement) {
+      console.log(settlement)
+    },
+    handleDeleteSettlement (settlement) {
+      this.REMOVE_SETTLEMENT(settlement)
+      // console.log(settlement)
+    },
     isActiveSettlement (settlement) {
       return settlement.month === this.currentMonth
     },

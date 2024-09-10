@@ -20,7 +20,18 @@
           <td>{{ emi.endDate | formatDate }}</td>
           <td>
             <span class="fas fa-pen fs-sm ml-5 pointer-cursor"></span>
-            <span class="far fa-trash-alt fs-sm ml-10 pointer-cursor"></span>
+            <app-popper
+              trigger="clickToOpen"
+              :options="{
+                placement: 'top',
+              }">
+              <div class="popper">
+                <div class="p-10">Delete ?</div>
+                <button  @click="handleDeleteEMI(emi.id)">Yes</button>
+              </div>
+              <span class="far fa-trash-alt fs-sm ml-10 pointer-cursor"></span>
+            <span class="far fa-trash-alt fs-sm ml-10 pointer-cursor" slot="reference"></span>
+            </app-popper>
           </td>
         </tr>
       </template>
@@ -60,7 +71,7 @@
   </table>
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
 
 export default {
@@ -85,8 +96,12 @@ export default {
   },
   methods: {
     ...mapActions('emis', ['addEmi']),
+    ...mapMutations('emis', ['REMOVE_EMI']),
     isActiveEMI (emi) {
       return emi.startDate <= this.currentMonth && emi.endDate >= this.currentMonth
+    },
+    handleDeleteEMI (emi) {
+      this.REMOVE_EMI(emi)
     },
     handleAddEmi () {
       if (!(
