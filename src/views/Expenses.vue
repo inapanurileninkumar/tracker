@@ -1,89 +1,88 @@
 <template>
-  <div class="row expenses-container">
-    <div class="card col-md-4 col-sm-12 col-xs-12">
-      <div class="header">
-        <div class="title">EXPENSES</div>
-      </div>
-      <div class="body">
-        <table class="expenses">
-          <thead>
-            <tr>
-              <th>SN</th>
-              <th>NAME</th>
-              <th>AMOUNT</th>
-              <th>PAID</th>
-            </tr>
-          </thead>
-          <tbody>
-            <template v-for="(expense, index) in currentMonthExpenses">
-              <tr :key="expense.name" @click="handleExpensePaid(expense)" class="pointer-cursor">
-                <td>{{ index + 1 }}</td>
-                <td>{{ expense.name }}</td>
-                <td class="right-align">{{ expense.amount | formatNumber }}</td>
-                <td class="checkbox">
-                  <template v-if="expense.paid">
-                    <i class="fa-regular fa-square-check text-primary fs-lg"></i>
-                  </template>
-                  <template v-else>
-                    <i class="fa-regular fa-square text-primary fs-lg"></i>
-                  </template>
-                </td>
-              </tr>
-            </template>
-          </tbody>
-        </table>
-      </div>
+    <div class="row align-stretch expenses-container">
+        <div class="card col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="header">
+                <div class="title">EXPENSES</div>
+            </div>
+            <div class="body">
+                <table class="expenses">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>NAME</th>
+                            <th>AMOUNT</th>
+                            <th>PAID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template v-for="(expense, index) in currentMonthExpenses">
+                            <tr :key="expense.name" @click="handleExpensePaid(expense)" class="pointer-cursor">
+                                <td>{{ index + 1 }}</td>
+                                <td>{{ expense.name }}</td>
+                                <td class="right-align">{{ expense.amount | formatNumber }}</td>
+                                <td class="checkbox">
+                                    <template v-if="expense.paid">
+                                        <i class="fa-regular fa-square-check text-primary fs-lg"></i>
+                                    </template>
+                                    <template v-else>
+                                        <i class="fa-regular fa-square text-primary fs-lg"></i>
+                                    </template>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="body">
+                    <div class="col-12 justify-center align-center">
+                        <v-chart class="expenses-chart" :option="chartData" autoresize />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="card mb-4 bg-primary text-white">
+                <div class="body">
+                    <div><span class="label">TOTAL</span></div>
+                    <div><span class="value">{{ totalExpenses | formatNumber }}</span></div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="body">
+                    <div><span class="label">ACCOUNT BALANCE</span></div>
+                    <div v-if="showEditAccountBalance">
+                        <input type="number" class="edit-account-balance" v-model.number="currentAccountBalance" @blur="showEditAccountBalance = false" />
+                    </div>
+                    <div v-else class="pointer-cursor" @click="showEditAccountBalance = true">
+                        <span class="value">
+                            {{ accountBalance |formatNumber }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4 bg-success text-white">
+                <div class="body">
+                    <div><span class="label">PAID</span></div>
+                    <div><span class="value">{{ paidAmount | formatNumber }}</span></div>
+                </div>
+            </div>
+            <div class="card mb-4 bg-warning text-white">
+                <div class="body">
+                    <div><span class="label">REMAINING</span></div>
+                    <div><span class="value">{{ unpaidAmount | formatNumber }}</span></div>
+                </div>
+            </div>
+            <div class="card mb-4 bg-danger text-white" v-if="accountBalance < unpaidAmount">
+                <div class="body">
+                    <div><span class="label">BORROW</span></div>
+                    <div><span class="value">{{ unpaidAmount - accountBalance | formatNumber }}</span></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-5 col-sm-12 col-xs-12">
-      <div class="card">
-        <div class="body">
-          <div class="col-12 justify-center align-center">
-            <v-chart class="expenses-chart" :option="chartData" autoresize />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-12 col-xs-12 col-md-3">
-      <div class="card mb-4 bg-primary text-white">
-        <div class="body">
-          <div><span class="label">TOTAL</span></div>
-          <div><span class="value">{{ totalExpenses | formatNumber }}</span></div>
-        </div>
-      </div>
-      <div class="card mb-4">
-        <div class="body">
-          <div><span class="label">ACCOUNT BALANCE</span></div>
-          <div v-if="showEditAccountBalance">
-            <input type="number" class="edit-account-balance" v-model.number="currentAccountBalance"
-              @blur="showEditAccountBalance = false" />
-          </div>
-          <div v-else class="pointer-cursor" @click="showEditAccountBalance = true">
-            <span class="value">
-              {{ accountBalance |formatNumber }}
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-4 bg-success text-white">
-        <div class="body">
-          <div><span class="label">PAID</span></div>
-          <div><span class="value">{{ paidAmount | formatNumber }}</span></div>
-        </div>
-      </div>
-      <div class="card mb-4 bg-warning text-white">
-        <div class="body">
-          <div><span class="label">REMAINING</span></div>
-          <div><span class="value">{{ unpaidAmount | formatNumber }}</span></div>
-        </div>
-      </div>
-      <div class="card mb-4 bg-danger text-white" v-if="accountBalance < unpaidAmount">
-        <div class="body">
-          <div><span class="label">BORROW</span></div>
-          <div><span class="value">{{ unpaidAmount - accountBalance | formatNumber }}</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
